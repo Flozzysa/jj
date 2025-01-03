@@ -95,7 +95,7 @@ AddEventHandler('esx_vehicleshopvip:setJobVehicleState', function(plate, state)
 	MySQL.update('UPDATE owned_vehicles SET `stored` = ? WHERE plate = ? AND job = ?', {state, plate, xPlayer.job.name},
 	function(rowsChanged)
 		if rowsChanged == 0 then
-			print(('[^3WARNING^7] Player ^5%s^7 Attempted To Exploit the Garage!'):format(source, plate))
+			print(('[^3WARNING^7] Player ^5%s^7 Intentó Explotar el Garaje!'):format(source, plate))
 		end
 	end)
 end)

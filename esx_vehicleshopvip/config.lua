@@ -4,8 +4,7 @@ Config.MarkerColor                = {r = 120, g = 120, b = 240}
 Config.EnablePlayerManagement     = false -- enables the actual car dealer job. You'll need esx_addonaccount, esx_billing and esx_society
 
 Config.Locale = GetConvar('esx:locale', 'es')
-Config.Locale = GetConvar('esx:locale', 'es')
-Config.UseVIPCredits = true -- toggle to use Ultra Coins for vehicle purchases
+Config.UseVIPCredits = true -- toggle to use VIP credits for vehicle purchases
 Config.LicenseEnable = false -- require people to own drivers license when buying vehicles? Only applies if EnablePlayerManagement is disabled. Requires esx_license
 
 -- looks like this: 'LLL NNN'
