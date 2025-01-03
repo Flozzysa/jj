@@ -5,7 +5,7 @@ Config.EnablePlayerManagement     = false -- enables the actual car dealer job. 
 
 Config.Locale = GetConvar('esx:locale', 'es')
 Config.Locale = GetConvar('esx:locale', 'es')
-Config.UseVIPCredits = true -- toggle to use VIP credits for vehicle purchases
+Config.UseVIPCredits = true -- toggle to use Ultra Coins for vehicle purchases
 Config.LicenseEnable = false -- require people to own drivers license when buying vehicles? Only applies if EnablePlayerManagement is disabled. Requires esx_license
 
 -- looks like this: 'LLL NNN'
