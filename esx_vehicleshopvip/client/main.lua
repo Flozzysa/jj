@@ -98,7 +98,7 @@ function OpenShopMenu()
                 firstVehicleData = vehicle
             end
 
-            local priceDisplay = Config.UseVIPCredits and TranslateCap('generic_shopitem_ultra', ESX.Math.GroupDigits(vehicle.price)) or TranslateCap('generic_shopitem', ESX.Math.GroupDigits(vehicle.price))
+local priceDisplay = Config.UseVIPCredits and TranslateCap('generic_shopitem_ultra', ESX.Math.GroupDigits(vehicle.price)) or TranslateCap('generic_shopitem', ESX.Math.GroupDigits(vehicle.price))
             table.insert(options, ('%s <span style="color:green;">%s</span>'):format(vehicle.name, priceDisplay))
         end
 
@@ -123,7 +123,7 @@ function OpenShopMenu()
         local vehicleData = vehiclesByCategory[data.current.name][data.current.value + 1]
 
         ESX.UI.Menu.Open('default', GetCurrentResourceName(), 'shop_confirm', {
-            title = Config.UseVIPCredits and TranslateCap('buy_vehicle_shop_ultra', vehicleData.name, ESX.Math.GroupDigits(vehicleData.price)) or TranslateCap('buy_vehicle_shop', vehicleData.name, ESX.Math.GroupDigits(vehicleData.price)),
+title = Config.UseVIPCredits and TranslateCap('buy_vehicle_shop_ultra', vehicleData.name, ESX.Math.GroupDigits(vehicleData.price)) or TranslateCap('buy_vehicle_shop', vehicleData.name, ESX.Math.GroupDigits(vehicleData.price)),
             align = 'top-left',
             elements = {
                 { label = TranslateCap('no'), value = 'no' },
@@ -141,7 +141,7 @@ function OpenShopMenu()
                         FreezeEntityPosition(playerPed, false)
                         SetEntityVisible(playerPed, true)
                     else
-                        local notification = Config.UseVIPCredits and TranslateCap('not_enough_ultra_coins') or TranslateCap('not_enough_money')
+local notification = Config.UseVIPCredits and TranslateCap('not_enough_ultra_coins') or TranslateCap('not_enough_money')
                         ESX.ShowNotification(notification)
                     end
                 end, vehicleData.model, generatedPlate)

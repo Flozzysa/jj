@@ -40,9 +40,10 @@ RegisterNetEvent("esx_vehicleshopvip:getVehiclesAndCategories", function()
 	TriggerClientEvent("esx_vehicleshopvip:updateVehiclesAndCategories", source, vehicles, categories, vehiclesByModel)
 end)
 
-ESX.RegisterServerCallback('esx_vehicleshopvip:buyVehicle', function(source, cb, model, plate)
+ESX.RegisterServerCallback('esx_vehicleshopvip:buyVehicle', function(source, cb, model)
 	local xPlayer = ESX.GetPlayerFromId(source)
 	local modelPrice = getVehicleFromModel(model).price
+	local plate = GeneratePlate()
 
 	if modelPrice and xPlayer.getAccount('ultra_coin').money >= modelPrice then
 		xPlayer.removeAccountMoney('ultra_coin', modelPrice, 'Vehicle Purchase')
