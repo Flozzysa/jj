@@ -1,3 +1,9 @@
+CREATE TABLE `users_vip_credits` (
+    `identifier` varchar(60) NOT NULL,
+    `vip_coins` int NOT NULL DEFAULT 0,
+    PRIMARY KEY (`identifier`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
 CREATE TABLE `vehicle_categories2` (
     `name` varchar(60) NOT NULL,
     `label` varchar(60) NOT NULL,

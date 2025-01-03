@@ -44,23 +44,25 @@ ESX.RegisterServerCallback('esx_vehicleshopvip:buyVehicle', function(source, cb,
 	local xPlayer = ESX.GetPlayerFromId(source)
 	local modelPrice = getVehicleFromModel(model).price
 
-	if modelPrice and xPlayer.getAccount('ultra_coin').money >= modelPrice then
-		xPlayer.removeAccountMoney('ultra_coin', modelPrice, 'Vehicle Purchase')
+	MySQL.scalar('SELECT vip_coins FROM users_vip_credits WHERE identifier = ?', {xPlayer.identifier}, function(vipCoins)
+		if modelPrice and vipCoins and vipCoins >= modelPrice then
+			MySQL.update('UPDATE users_vip_credits SET vip_coins = vip_coins - ? WHERE identifier = ?', {modelPrice, xPlayer.identifier})
 
-		MySQL.insert('INSERT INTO owned_vehicles (owner, plate, vehicle) VALUES (?, ?, ?)', {xPlayer.identifier, plate, json.encode({model = joaat(model), plate = plate})
-		}, function(rowsChanged)
-			xPlayer.showNotification(TranslateCap('vehicle_belongs', plate))
-			ESX.OneSync.SpawnVehicle(joaat(model), Config.Zones.ShopOutside.Pos, Config.Zones.ShopOutside.Heading,{plate = plate}, function(vehicle)
-				Wait(100)
-				local vehicle = NetworkGetEntityFromNetworkId(vehicle)
-				Wait(300)
-				TaskWarpPedIntoVehicle(GetPlayerPed(source), vehicle, -1)
+			MySQL.insert('INSERT INTO owned_vehicles (owner, plate, vehicle) VALUES (?, ?, ?)', {xPlayer.identifier, plate, json.encode({model = joaat(model), plate = plate})
+			}, function(rowsChanged)
+				xPlayer.showNotification(TranslateCap('vehicle_belongs', plate))
+				ESX.OneSync.SpawnVehicle(joaat(model), Config.Zones.ShopOutside.Pos, Config.Zones.ShopOutside.Heading,{plate = plate}, function(vehicle)
+					Wait(100)
+					local vehicle = NetworkGetEntityFromNetworkId(vehicle)
+					Wait(300)
+					TaskWarpPedIntoVehicle(GetPlayerPed(source), vehicle, -1)
+				end)
+				cb(true)
 			end)
-			cb(true)
-		end)
-	else
-		cb(false)
-	end
+		else
+			cb(false)
+		end
+	end)
 end)
 
 ESX.RegisterServerCallback('esx_vehicleshopvip:getPlayerInventory', function(source, cb)
